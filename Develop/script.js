@@ -3,19 +3,60 @@ var length = 1;
 
 function generatePassword() {
 
-  var lengthConfirm = window.confirm("Would you like to specify your password's LENGTH? Click OK for yes, and CANCEL for no.");
-    if (lengthConfirm === true) {
+  // CRITERIA PROMPT
+
+  var criteria = window.prompt("Would you like to specify the password LENGTH or CHARACTER TYPES? Enter 1 for LENGTH and 2 for CHARACTER TYPES. Or enter 3 to generate a PASSWORD now.");
+
+  criteria = parseInt(criteria);
+
+    if (criteria === 1) {
+
       passwordLength();
-    } else {
+
+      var characterConfirm = window.confirm("Would you like to specify your password's LENGTH? Click OK for yes, and CANCEL for no.");
+      if (characterConfirm === true) {
+          passwordCharacters();
+      } else {
+        characters = "abcdefghijklmnopqrtuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%&*";
+      };
+    }
+
+    else if (criteria === 2) {
+
+      passwordCharacters();
+
+      //window.confirm("Would you like to specify your password's LENGTH? Click OK for yes, and CANCEL for no.");
+      var lengthConfirm = window.confirm("Would you like to specify your password's LENGTH? Click OK for yes, and CANCEL for no.");
+      if (lengthConfirm === true) {
+       passwordLength();
+      } else {
+        length = 15;
+      };
+    }
+
+    else if (criteria === 3) {
+      characters = "abcdefghijklmnopqrtuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%&*";
       length = 15;
+    }
+
+    else {
+      window.alert("Please choose 1, 2, or 3.")
+      generatePassword();
     };
 
-  var characterConfirm = window.confirm("Would you like to specify your password's character types? Click OK for yes, and CANCEL for no.");
-    if (characterConfirm === true) {
-      passwordCharacters();
-    } else {
-      characters = "abcdefghijklmnopqrtuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%&*";
-    };
+  // var lengthConfirm = window.confirm("Would you like to specify your password's LENGTH? Click OK for yes, and CANCEL for no.");
+  //   if (lengthConfirm === true) {
+  //     passwordLength();
+  //   } else {
+  //     length = 15;
+  //   };
+
+  // var characterConfirm = window.confirm("Would you like to specify your password's character types? Click OK for yes, and CANCEL for no.");
+  //   if (characterConfirm === true) {
+  //     passwordCharacters();
+  //   } else {
+  //     characters = "abcdefghijklmnopqrtuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%&*";
+  //   };
 
   return finalizePassword();
 };
@@ -45,32 +86,46 @@ function passwordLength() {
 function passwordCharacters() {
   var lowerCase = window.confirm("Would you like to include LOWERCASE characters?");
   console.log(lowerCase);
+
+  if (lowerCase === true) {
+    characters = "abcdefghijklmnopqrstuvwxyz";
+    window.alert("Gotcha! Your password WILL include LOWERCASE characters.");
+  } else {
+    window.alert("Gotcha! Your password will NOT include LOWERCASE characters.");
+  }
+
   var upperCase = window.confirm("Would you like to include UPPERCASE characters?");
   console.log(upperCase);
+
+  if (upperCase === true) {
+    characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + characters;
+    window.alert("Gotcha! Your password WILL include UPPERCASE characters.");
+  } else {
+    window.alert("Gotcha! Your password will NOT include UPPERCASE characters.");
+  }
+
   var numericalCharacters = window.confirm("Would you like to include NUMERICAL characters like 1, 2, or 3?");
   console.log(numericalCharacters);
+
+  if (numericalCharacters === true) {
+    characters = "1234567890" + characters;
+    window.alert("Gotcha! Your password WILL include NUMERICAL characters.");
+  } else {
+    window.alert("Gotcha! Your password will NOT include NUMERICAL characters.");
+  }
   var specialCharacters = window.confirm("Would you like to include SPECIAL characters like !, @, or #?");
   console.log(specialCharacters);
 
-    if (lowerCase === true) {
-      characters = "abcdefghijklmnopqrstuvwxyz"
-    }
-
-    if (upperCase === true) {
-      characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + characters  
-      }
-
-    if (numericalCharacters === true) {
-      characters = "1234567890" + characters
-    }
-
-    if (specialCharacters === true) {
-      characters = "!@#$%&*" + characters
-    }
-    if (lowerCase === false && upperCase === false && numericalCharacters === false && specialCharacters === false) {
-      window.alert("Please choose at least one character type.");
-      return passwordCharacters();
-    }
+  if (specialCharacters === true) {
+    characters = "!@#$%&*" + characters;
+    window.alert("Gotcha! Your password WILL include SPECIAL characters.");
+  } else {
+    window.alert("Gotcha! Your password will NOT include SPECIAL characters.");
+  }
+  if (lowerCase === false && upperCase === false && numericalCharacters === false && specialCharacters === false) {
+    window.alert("Please choose at least one character type.");
+    return passwordCharacters();
+  }
 };
 
 
