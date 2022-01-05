@@ -1,49 +1,125 @@
-// Assignment code here
+var characters = "abc123!@#";
+var length = 10;
+
 function generatePassword() {
-  var promptCriteria = window.prompt('What would you like to specify? Type "1" for Password length, "2" for special character types, or "3" to generate your password now.');
 
-  if (promptCriteria === "1") {
-    passwordLength();
-  }
+  var lengthConfirm = window.confirm("Would you like to specify your password's LENGTH?");
+    if (lengthConfirm === true) {
+      passwordLength();
+    };
 
-  else if (promptCriteria === "2") {
-    passwordCharacters();
-  }
+  var characterConfirm = window.confirm("Would you like to specify your password's character types?");
+    if (characterConfirm === true) {
+      passwordCharacters();
+    }
 
-  else if (promptCriteria === "3") {
-    window.prompt("Great!");
-  }
+  return finalizePassword();
+};
 
-  else {
-    alert("Please let us know what you'd like to specify.");
-    return generatePassword();
-  }
-}
-
-
+//Password length function
 
 function passwordLength() {
-  var length = window.prompt("How long should your password be? (Please choose any number from 8 to 128.)");
+  length = window.prompt("How long should your password be? (Please choose any number from 8 to 128.)");
   
   length = parseInt(length);
 
   if (length < 8 || length > 128 ) {
-    window.prompt("Please choose a number from 8 to 128.");
+    window.alert("Please choose a number from 8 to 128.");
     return passwordLength();
   } else {
     window.alert("Gotcha! Your password will be " + length + " characters long!");
-  }
-}
+    console.log(length);
+  };
+};
+
+
+// Password characters function
 
 function passwordCharacters() {
-  var lowerCase = window.alert("Would you like to include Lowercase characters?");
+  var lowerCase = window.confirm("Would you like to include Lowercase characters?");
+  console.log(lowerCase);
   if (lowerCase === true){
-  var upperCase = window.alert("Would you like to include Uppercase characters?");
-  }
-  var numericalCharacters = window.alert("Would you like to include Numerical characters?");
-  var specialCharacters = window.alert("Would you like to include Special characters like !, @, or #?");
-}
+  var upperCase = window.confirm("Would you like to include Uppercase characters?");
+  console.log(upperCase);
+  };
+  var numericalCharacters = window.confirm("Would you like to include Numerical characters?");
+  console.log(numericalCharacters);
+  var specialCharacters = window.confirm("Would you like to include Special characters like !, @, or #?");
+  console.log(specialCharacters);
 
+    if (lowerCase === true) {
+      characters = "abcdefghijklmnopqrstuvwxyz"
+    } else {
+      characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    }
+    // console.log("1st",characters);
+
+    if (upperCase === true) {
+      characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + characters  
+    }
+    // console.log("2nd",characters);
+
+    if (numericalCharacters === true) {
+      characters = "1234567890" + characters
+    }
+    // console.log("3rd",characters);
+
+    if (specialCharacters === true) {
+      characters = "!@#$%&*" + characters
+    }
+    // console.log("4th",characters);
+  // }
+
+  // generatePassword();
+};
+
+// MAKE FROM LENGTH FUNCTION
+//MAKE FROM CHARACTER FUNCTION
+
+
+//Random number generator
+
+// var randomNumber = function(min, max) {
+//   var value = Math.floor(Math.random() * (max - min + 1) + min);
+
+//   return value;
+// };
+
+
+//finalized Password
+
+function finalizePassword() {
+  var finalResult = "";
+  const finalLength = length;
+  // var finalCharacters = Array.from(characters);
+  const finalCharacters = characters;
+  
+  console.log(finalLength);
+  console.log(finalCharacters);
+  
+  generateFinalPassword();
+
+  function generateFinalPassword(finalLength) {
+    // let finalResult = '';
+    const characterLength = finalCharacters.length;
+    console.log(characterLength)
+
+    for (let i = 0; i < finalLength; i++ ) {
+      finalResult += finalCharacters.charAt(Math.floor(Math.random() * characterLength));
+    }
+    return finalResult;
+  }
+  // var random = Math.floor(Math.random() * finalCharacters.length);
+  // console.log(random);
+  
+  // for (var i = 0; i < finalLength; i++) {
+    
+  // }
+
+  console.log(finalResult);
+
+  return finalResult;
+};
  
 
 // Get references to the #generate element
