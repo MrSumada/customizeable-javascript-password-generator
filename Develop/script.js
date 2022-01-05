@@ -1,6 +1,8 @@
 var characters = "";
 var length = 1;
 
+// Generate password function, executed on CLICK
+
 function generatePassword() {
 
   // CRITERIA PROMPT
@@ -9,6 +11,8 @@ function generatePassword() {
 
   criteria = parseInt(criteria);
 
+
+  // LENGTH SPECIFICATION OPTION SELECTED
     if (criteria === 1) {
 
       passwordLength();
@@ -21,11 +25,11 @@ function generatePassword() {
       };
     }
 
+  // LENGTH SPECIFICATION OPTION SELECTED
     else if (criteria === 2) {
 
       passwordCharacters();
 
-      //window.confirm("Would you like to specify your password's LENGTH? Click OK for yes, and CANCEL for no.");
       var lengthConfirm = window.confirm("Would you like to specify your password's LENGTH? Click OK for yes, and CANCEL for no.");
       if (lengthConfirm === true) {
        passwordLength();
@@ -33,35 +37,25 @@ function generatePassword() {
         length = 15;
       };
     }
-
+  // NO SPECIFICATION OPTION SELECTED
     else if (criteria === 3) {
       characters = "abcdefghijklmnopqrtuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%&*";
       length = 15;
     }
 
+  // ERROR IN CRITERIA SELECTION
     else {
       window.alert("Please choose 1, 2, or 3.")
       generatePassword();
     };
 
-  // var lengthConfirm = window.confirm("Would you like to specify your password's LENGTH? Click OK for yes, and CANCEL for no.");
-  //   if (lengthConfirm === true) {
-  //     passwordLength();
-  //   } else {
-  //     length = 15;
-  //   };
 
-  // var characterConfirm = window.confirm("Would you like to specify your password's character types? Click OK for yes, and CANCEL for no.");
-  //   if (characterConfirm === true) {
-  //     passwordCharacters();
-  //   } else {
-  //     characters = "abcdefghijklmnopqrtuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%&*";
-  //   };
-
+  //ONCE CRITERIA ESTABLISHED, FINALIZE PASSWORD
   return finalizePassword();
 };
 
-//Password length function
+
+//Password Length function
 
 function passwordLength() {
   length = window.prompt("How long should your password be? (Please type any number from 8 to 128.)");
@@ -77,15 +71,13 @@ function passwordLength() {
 
   } else {
     window.alert("Gotcha! Your password will be " + length + " characters long!");
-    console.log(length);
   };
 };
 
-// Password characters function
+// Password Characters function, Lowercase, Uppercase, Numbers, then Special Characters
 
 function passwordCharacters() {
   var lowerCase = window.confirm("Would you like to include LOWERCASE characters?");
-  console.log(lowerCase);
 
   if (lowerCase === true) {
     characters = "abcdefghijklmnopqrstuvwxyz";
@@ -95,7 +87,6 @@ function passwordCharacters() {
   }
 
   var upperCase = window.confirm("Would you like to include UPPERCASE characters?");
-  console.log(upperCase);
 
   if (upperCase === true) {
     characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + characters;
@@ -104,17 +95,15 @@ function passwordCharacters() {
     window.alert("Gotcha! Your password will NOT include UPPERCASE characters.");
   }
 
-  var numericalCharacters = window.confirm("Would you like to include NUMERICAL characters like 1, 2, or 3?");
-  console.log(numericalCharacters);
+  var numericalCharacters = window.confirm("Would you like to include NUMBERS?");
 
   if (numericalCharacters === true) {
     characters = "1234567890" + characters;
-    window.alert("Gotcha! Your password WILL include NUMERICAL characters.");
+    window.alert("Gotcha! Your password WILL include NUMBERS.");
   } else {
-    window.alert("Gotcha! Your password will NOT include NUMERICAL characters.");
+    window.alert("Gotcha! Your password will NOT include NUMBERS.");
   }
   var specialCharacters = window.confirm("Would you like to include SPECIAL characters like !, @, or #?");
-  console.log(specialCharacters);
 
   if (specialCharacters === true) {
     characters = "!@#$%&*" + characters;
@@ -122,6 +111,8 @@ function passwordCharacters() {
   } else {
     window.alert("Gotcha! Your password will NOT include SPECIAL characters.");
   }
+
+  // Password Characters ERROR catch
   if (lowerCase === false && upperCase === false && numericalCharacters === false && specialCharacters === false) {
     window.alert("Please choose at least one character type.");
     return passwordCharacters();
@@ -129,19 +120,15 @@ function passwordCharacters() {
 };
 
 
-//finalized Password
+//Finalized Password
 
 function finalizePassword() {
   var finalResult = "";
   var finalLength = length;
   var finalCharacters = Array.from(characters);
-  
-  console.log(finalLength);
-  console.log(finalCharacters);
-
   var random = Math.floor(Math.random() * finalCharacters.length);
 
-  finalResult = finalCharacters[random];
+  //Final Result loop: picks Random character from ARRAY, adds to finalResult, iterates until finalLength
 
   for (let i = 0; i < finalLength; i++) {
     finalResult = finalCharacters[Math.floor(Math.random() * finalCharacters.length)] + finalResult;
