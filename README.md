@@ -1,4 +1,6 @@
-# Refactor for Password Generator includes: 
+# Refactor for Password Generator:
+
+  https://mrsumada.github.io/password-generator/
 
   - Prompts user for which Criteria to specify.
   
