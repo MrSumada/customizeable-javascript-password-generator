@@ -17,7 +17,7 @@ function generatePassword() {
 
       passwordLength();
 
-      var characterConfirm = window.confirm("Would you like to specify your password's LENGTH? Click OK for yes, and CANCEL for no.");
+      var characterConfirm = window.confirm("Would you like to specify your password's LENGTH? Click OK for yes and CANCEL for no.");
       if (characterConfirm === true) {
           passwordCharacters();
       } else {
@@ -30,7 +30,7 @@ function generatePassword() {
 
       passwordCharacters();
 
-      var lengthConfirm = window.confirm("Would you like to specify your password's LENGTH? Click OK for yes, and CANCEL for no.");
+      var lengthConfirm = window.confirm("Would you like to specify your password's LENGTH? Click OK for yes and CANCEL for no.");
       if (lengthConfirm === true) {
        passwordLength();
       } else {
@@ -77,7 +77,7 @@ function passwordLength() {
 // Password Characters function, Lowercase, Uppercase, Numbers, then Special Characters
 
 function passwordCharacters() {
-  var lowerCase = window.confirm("Would you like to include LOWERCASE characters?");
+  var lowerCase = window.confirm("Would you like to include LOWERCASE characters? Click OK for yes and CANCEL for no.");
 
   if (lowerCase === true) {
     characters = "abcdefghijklmnopqrstuvwxyz";
@@ -86,7 +86,7 @@ function passwordCharacters() {
     window.alert("Gotcha! Your password will NOT include LOWERCASE characters.");
   }
 
-  var upperCase = window.confirm("Would you like to include UPPERCASE characters?");
+  var upperCase = window.confirm("Would you like to include UPPERCASE characters? Click OK for yes and CANCEL for no.");
 
   if (upperCase === true) {
     characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + characters;
@@ -95,7 +95,7 @@ function passwordCharacters() {
     window.alert("Gotcha! Your password will NOT include UPPERCASE characters.");
   }
 
-  var numericalCharacters = window.confirm("Would you like to include NUMBERS?");
+  var numericalCharacters = window.confirm("Would you like to include NUMBERS? Click OK for yes and CANCEL for no.");
 
   if (numericalCharacters === true) {
     characters = "1234567890" + characters;
@@ -103,7 +103,7 @@ function passwordCharacters() {
   } else {
     window.alert("Gotcha! Your password will NOT include NUMBERS.");
   }
-  var specialCharacters = window.confirm("Would you like to include SPECIAL characters like !, @, or #?");
+  var specialCharacters = window.confirm("Would you like to include SPECIAL characters like !, @, or #?. Click OK for yes and CANCEL for no.");
 
   if (specialCharacters === true) {
     characters = "!@#$%&*" + characters;
