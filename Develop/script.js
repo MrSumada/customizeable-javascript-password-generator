@@ -1,23 +1,29 @@
 var characters = "";
-var length = 1;
+var length;
 
 // Generate password function, executed on CLICK
-
 function generatePassword() {
 
-  // CRITERIA PROMPT
+  promptPassword();
 
-  var criteria = window.prompt("Would you like to specify the password LENGTH or CHARACTER TYPES? Enter 1 for LENGTH and 2 for CHARACTER TYPES. Or enter 3 to generate a PASSWORD now.");
+  return finalizePassword();
+};
+
+
+// Password Prompt Functions
+function promptPassword() {
+
+  // criteria variable
+  var criteria = window.prompt("Choose your password's specifications: Type '1' for PASSWORD LENGTH, '2' for CHARACTER TYPES, or '3' to generate a PASSWORD now.");
 
   criteria = parseInt(criteria);
-
 
   // LENGTH SPECIFICATION OPTION SELECTED
     if (criteria === 1) {
 
       passwordLength();
 
-      var characterConfirm = window.confirm("Would you like to specify your password's LENGTH? Click OK for yes and CANCEL for no.");
+      var characterConfirm = window.confirm("Would you like to specify your password's CHARACTER TYPES?");
       if (characterConfirm === true) {
           passwordCharacters();
       } else {
@@ -25,12 +31,12 @@ function generatePassword() {
       };
     }
 
-  // LENGTH SPECIFICATION OPTION SELECTED
+  // CHARACTER SPECIFICATION OPTION SELECTED
     else if (criteria === 2) {
 
       passwordCharacters();
 
-      var lengthConfirm = window.confirm("Would you like to specify your password's LENGTH? Click OK for yes and CANCEL for no.");
+      var lengthConfirm = window.confirm("Would you like to specify your password's LENGTH?");
       if (lengthConfirm === true) {
        passwordLength();
       } else {
@@ -46,17 +52,11 @@ function generatePassword() {
   // ERROR IN CRITERIA SELECTION
     else {
       window.alert("Please choose 1, 2, or 3.")
-      generatePassword();
+      promptPassword();
     };
-
-
-  //ONCE CRITERIA ESTABLISHED, FINALIZE PASSWORD
-  return finalizePassword();
 };
 
-
 //Password Length function
-
 function passwordLength() {
   length = window.prompt("How long should your password be? (Please type any number from 8 to 128.)");
   
@@ -75,9 +75,8 @@ function passwordLength() {
 };
 
 // Password Characters function, Lowercase, Uppercase, Numbers, then Special Characters
-
 function passwordCharacters() {
-  var lowerCase = window.confirm("Would you like to include LOWERCASE characters? Click OK for yes and CANCEL for no.");
+  var lowerCase = window.confirm("Would you like to include LOWERCASE characters?");
 
   if (lowerCase === true) {
     characters = "abcdefghijklmnopqrstuvwxyz";
@@ -86,27 +85,27 @@ function passwordCharacters() {
     window.alert("Gotcha! Your password will NOT include LOWERCASE characters.");
   }
 
-  var upperCase = window.confirm("Would you like to include UPPERCASE characters? Click OK for yes and CANCEL for no.");
+  var upperCase = window.confirm("Would you like to include UPPERCASE characters?");
 
   if (upperCase === true) {
-    characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + characters;
+    characters += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     window.alert("Gotcha! Your password WILL include UPPERCASE characters.");
   } else {
     window.alert("Gotcha! Your password will NOT include UPPERCASE characters.");
   }
 
-  var numericalCharacters = window.confirm("Would you like to include NUMBERS? Click OK for yes and CANCEL for no.");
+  var numericalCharacters = window.confirm("Would you like to include NUMBERS?");
 
   if (numericalCharacters === true) {
-    characters = "1234567890" + characters;
+    characters += "1234567890";
     window.alert("Gotcha! Your password WILL include NUMBERS.");
   } else {
     window.alert("Gotcha! Your password will NOT include NUMBERS.");
   }
-  var specialCharacters = window.confirm("Would you like to include SPECIAL characters like !, @, or #?. Click OK for yes and CANCEL for no.");
+  var specialCharacters = window.confirm("Would you like to include SPECIAL characters like !, @, or #?.");
 
   if (specialCharacters === true) {
-    characters = "!@#$%&*" + characters;
+    characters += "!@#$%&*";
     window.alert("Gotcha! Your password WILL include SPECIAL characters.");
   } else {
     window.alert("Gotcha! Your password will NOT include SPECIAL characters.");
@@ -124,14 +123,11 @@ function passwordCharacters() {
 
 function finalizePassword() {
   var finalResult = "";
-  var finalLength = length;
   var finalCharacters = Array.from(characters);
-  var random = Math.floor(Math.random() * finalCharacters.length);
 
   //Final Result loop: picks Random character from ARRAY, adds to finalResult, iterates until finalLength
-
-  for (let i = 0; i < finalLength; i++) {
-    finalResult = finalCharacters[Math.floor(Math.random() * finalCharacters.length)] + finalResult;
+  for (let i = 0; i < length; i++) {
+    finalResult += finalCharacters[Math.floor(Math.random() * finalCharacters.length)];
   }
     return finalResult;
   };
