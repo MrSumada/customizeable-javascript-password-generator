@@ -1,6 +1,6 @@
 # Refactor for Password Generator:
 
-  https://mrsumada.github.io/password-generator/
+  https://mrsumada.github.io/customizeable-javascript-password-generator/
 
   - Prompts user for which Criteria to specify.
   
